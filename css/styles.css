@@ -105,15 +105,24 @@ h1 {
   font-style: italic;
 }
 
+/* ------- Changes to code: removing punctuation, styling links ------- */
+
 .citation:before {
-  content: ", ";
+  /* content: ", "; */
   font-style: normal;
 }
 
 .year:before {
-  content: ", ";
+  /* content: ", "; */
   font-style: normal;
 }
+
+a {
+  color:#fff;
+  font-style: italic;
+}
+
+/* ------- End of changes to the original project code ------- */
 
 @media (min-width: 768px) {
   body {

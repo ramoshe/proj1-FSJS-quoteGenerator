@@ -56,14 +56,21 @@ const quotes = [
 ];
 
 
+let randomNumber = Math.floor( Math.random() * (quotes.length - 1) ) + 1;
+
 /**
- * This function chooses a random quote.
+ * This function chooses a random quote, making sure its a new one.
  *
  * @param {array} quotes - The array of quote objects.
+ * @param {number} randomNumber - A random number between 1 & number of quotes.
  * @return {object} The random quote object.
  */
-function getRandomQuote(quotes) {
-    let randomNumber = Math.floor( Math.random() * (quotes.length - 1) ) + 1;
+function getRandomQuote(quotes, randomNumber) {
+    let newRandomNumber = randomNumber;
+    do {
+        newRandomNumber = Math.floor( Math.random() * (quotes.length - 1) ) + 1;
+    } while (newRandomNumber === randomNumber);
+    randomNumber = newRandomNumber;
     return quotes[randomNumber];
 }
 
@@ -75,24 +82,27 @@ function getRandomQuote(quotes) {
  * @return {string} The HTML code for the quote.
  */
 function printQuote() {
-    let randomQuote = getRandomQuote(quotes);
+    let randomQuote = getRandomQuote(quotes, randomNumber);
     let html = `
         <p class="quote">${randomQuote.quote}</p>
-        <p class="source">${randomQuote.source}
-    `;
+        <p class="source">${randomQuote.source}`;
     if ('citation' in randomQuote) {
-        html += `<span class="citation">${randomQuote.citation}</span>`;
+        html += `<span class="citation">, ${randomQuote.citation}</span>`;
     }
     if ('year' in randomQuote) {
-        html += `<span class="year">${randomQuote.year}</span>`;
+        html += `<span class="year">, ${randomQuote.year}</span>`;
     }
     if ('bookLink' in randomQuote) {
-        html += `<a class="bookLink" href="${randomQuote.bookLink}">Click to read the book</a>`;
+        html += `<span>, <a class="bookLink" href="${randomQuote.bookLink}">Click to read the book</a></span>`;
     }
     html += `</p>`;
     document.getElementById('quote-box').innerHTML = html; 
-    // ADD CODE TO SET A RANDOM BACKGROUND COLOR
-    //ADD AUTO REFRESH OF CODE AT 20 SECOND INTERVAL - use setInterval()
+    
+    /***
+     * Set a random background color
+     * (math for random color copied from from https://css-tricks.com/snippets/javascript/random-hex-color/)
+    ***/
+   document.body.style.background = '#' + Math.floor(Math.random()*16777215).toString(16);
 }
 
 
@@ -101,3 +111,9 @@ function printQuote() {
  * (This code came in the project file.)
 ***/
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
+
+
+/***
+ * Auto refresh qupte every 20 seconds.
+***/
+window.setInterval(printQuote, 20000);
