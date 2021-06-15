@@ -3,13 +3,12 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
-/*** 
- * `quotes` array 
-***/
+/***
+ * This array of objects holds inspirational quotes from books
+ * that are displayed randomly on the page using the functions below.
+ * 
+ * Source for quotes: https://bookriot.com/short-inspirational-quotes/
+ ***/
 const quotes = [
     {
         quote: `Those who don't believe in magic will never find it.`,
@@ -51,25 +50,32 @@ const quotes = [
         quote: `When you can't find someone to follow, you have to find a way to lead by example.`,
         source: `Roxane Gay`,
         citation: `Bad Feminist`,
-        year: 2014
+        year: 2014,
+        bookLink: `https://read.amazon.com/kp/embed?asin=B00G2AGV14&preview=newtab&linkCode=kpe&ref_=cm_sw_r_kb_dp_5C5G9QZCA225QYZ261S7`
     }
 ];
 
 
-/***
- * `getRandomQuote` function
-***/
-function getRandomQuotes(quotes) {
+/**
+ * This function chooses a random quote.
+ *
+ * @param {array} quotes - The array of quote objects.
+ * @return {object} The random quote object.
+ */
+function getRandomQuote(quotes) {
     let randomNumber = Math.floor( Math.random() * (quotes.length - 1) ) + 1;
     return quotes[randomNumber];
 }
 
 
-/***
- * `printQuote` function
-***/
+/**
+ * This function creates the HTML to display the randomly chosen quote.
+ *
+ * @param {array} quotes - The array of quote objects.
+ * @return {string} The HTML code for the quote.
+ */
 function printQuote() {
-    let randomQuote = getRandomQuotes(quotes);
+    let randomQuote = getRandomQuote(quotes);
     let html = `
         <p class="quote">${randomQuote.quote}</p>
         <p class="source">${randomQuote.source}
@@ -80,14 +86,18 @@ function printQuote() {
     if ('year' in randomQuote) {
         html += `<span class="year">${randomQuote.year}</span>`;
     }
+    if ('bookLink' in randomQuote) {
+        html += `<a class="bookLink" href="${randomQuote.bookLink}">Click to read the book</a>`;
+    }
     html += `</p>`;
     document.getElementById('quote-box').innerHTML = html; 
+    // ADD CODE TO SET A RANDOM BACKGROUND COLOR
+    //ADD AUTO REFRESH OF CODE AT 20 SECOND INTERVAL - use setInterval()
 }
 
 
 /***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
+ * Click event listener for the print quote button.
+ * (This code came in the project file.)
 ***/
-
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
