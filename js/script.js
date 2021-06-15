@@ -65,10 +65,10 @@ let randomNumber = Math.floor( Math.random() * (quotes.length - 1) ) + 1;
  * @param {number} randomNumber - A random number between 1 & number of quotes.
  * @return {object} The random quote object.
  */
-function getRandomQuote(quotes, randomNumber) {
+function getRandomQuote(quotes) {
     let newRandomNumber = randomNumber;
     do {
-        newRandomNumber = Math.floor( Math.random() * (quotes.length - 1) ) + 1;
+        newRandomNumber = Math.floor( Math.random() * (quotes.length) );
     } while (newRandomNumber === randomNumber);
     randomNumber = newRandomNumber;
     return quotes[randomNumber];
@@ -82,7 +82,7 @@ function getRandomQuote(quotes, randomNumber) {
  * @return {string} The HTML code for the quote.
  */
 function printQuote() {
-    let randomQuote = getRandomQuote(quotes, randomNumber);
+    let randomQuote = getRandomQuote(quotes);
     let html = `
         <p class="quote">${randomQuote.quote}</p>
         <p class="source">${randomQuote.source}`;
@@ -93,16 +93,16 @@ function printQuote() {
         html += `<span class="year">, ${randomQuote.year}</span>`;
     }
     if ('bookLink' in randomQuote) {
-        html += `<span>, <a class="bookLink" href="${randomQuote.bookLink}">Click to read the book</a></span>`;
+        html += `<span>, <a class="bookLink" target="_blank" href="${randomQuote.bookLink}">Click to read the book</a></span>`;
     }
     html += `</p>`;
     document.getElementById('quote-box').innerHTML = html; 
     
     /***
      * Set a random background color
-     * (math for random color copied from from https://css-tricks.com/snippets/javascript/random-hex-color/)
+     * (formula for random color copied from from https://css-tricks.com/snippets/javascript/random-hex-color/)
     ***/
-   document.body.style.background = '#' + Math.floor(Math.random()*16777215).toString(16);
+    document.body.style.background = '#' + Math.floor(Math.random()*16777215).toString(16);
 }
 
 
