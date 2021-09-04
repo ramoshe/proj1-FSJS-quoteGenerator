@@ -2,9 +2,9 @@
  
 My first project for the Full Stack JavaScript Techdegree program at Treehouse. An app that displays random quotes with a randomly generataed background color. 
 
-## How To
+## How To Use
  - You can view a live version of this project here: https://g.ramoshe.com/thp1-quoteGenerator/
- - If you want to download a copy of the project:
+ - If you want a local copy of the project:
     1. Download the files: https://github.com/ramoshe/thp1-quoteGenerator/archive/refs/heads/main.zip
     2. Open the `index.html` file in your browser
 
